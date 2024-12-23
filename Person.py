@@ -1,3 +1,5 @@
+class TooOldError(ValueError):
+    pass
 
 class Person:
     genre = ['Male', 'Female']
@@ -45,9 +47,16 @@ class Child(Person):
 
     @classmethod
     def Male(cls, age):
+        if age > 18 :
+            raise TooOldError(
+                f"Too Old apparently to be a child !!! "
+            )
         return cls(Person.genre[0], age)
 
+try :
+    Ted = Child.Male(19)
+    print(Ted)
+    Ted.checkAge()
+except TooOldError as e:
+    print(e)
 
-Ted = Child.Male(12)
-print(Ted)
-Ted.checkAge()
